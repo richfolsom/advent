@@ -18,11 +18,7 @@ lineReader.on('close', function() {
 
   while (loc < moves.length) {
     next = loc + moves[loc];
-    if (moves[loc] < 3)
-      moves[loc]++;
-    else {
-      moves[loc]--;
-    }
+    moves[loc]++;
     loc = next;
     counter++;
   }
