@@ -1,5 +1,5 @@
-//var blocks = [4, 1, 15, 12, 0, 9, 9, 5, 5, 8, 7, 3, 14, 5, 12, 3];
-var blocks = [0, 2, 7, 0];
+var blocks = [4, 1, 15, 12, 0, 9, 9, 5, 5, 8, 7, 3, 14, 5, 12, 3];
+//var blocks = [0, 2, 7, 0];
 
 var list = [];
 var counter = 1;
@@ -16,33 +16,26 @@ calc_vals = function(blocks) {
       max = blocks[i];
     }
   }
-  console.log(max_idx);
-
-  var incr;
-  if (max < blocks.length) {
-    incr = 1;
-    blocks[max_idx] = 0;
-  } else {
-    incr = Math.floor(max / (blocks.length - 1));
-  }
   var arr = blocks.slice(0);
-
+  arr[max_idx] = 0;
   var left = max;
-  for (var i = 1; i < blocks.length; i++) {
-    arr[(max_idx + i) % blocks.length] += incr;
-    left -= incr;
+  var idx = 1;
+  while (left > 0) {
+    arr[(max_idx + idx) % blocks.length]++;
+    idx++;
+    left--;
   }
-  if (left >= 0)
-    arr[max_idx] = left;
+  //console.log(arr);
   list.push(arr);
 
 }
 
 compare_arrays = function(arr1, arr2) {
-  for (var i = 0; i < arr1.length; i++)
+  var i = 0;
+  for (i = 0; i < arr1.length; i++)
     if (arr1[i] != arr2[i])
-      return false
-  return true;
+      return -1;
+  return i;
 }
 
 var done = false;
@@ -50,12 +43,13 @@ var i = 0;
 list.push(blocks);
 while (!done) {
   calc_vals(list[i]);
-  for (var j = 0; j <= i; j++)
-    if (compare_arrays(list[i + 1], list[j])) {
+  for (var j = 0; j <= i; j++) {
+    var val = compare_arrays(list[i + 1], list[j])
+    if (val >= 0) {
       done = true;
-      console.log('result=' + (list.length - 1));
+      console.log('result=' + (list.length - j - 1));
     }
-
+  }
   i++;
 }
 
