@@ -79,13 +79,13 @@ var findHighest = function() {
   for (key in regs)
     if (regs[key] > highest)
       highest = regs[key];
+
 }
 
 
 for (var i = 0; i < instructions.length; i++)
   if (instructions[i].eval_if()) {
     instructions[i].apply_op();
-    findHighest();
   }
+findHighest()
 console.log(highest);
-//console.log(regs);
