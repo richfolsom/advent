@@ -32,8 +32,10 @@ var getToken = function(s) {
 }
 
 
-var fs = require('fs');
-var input = fs.readFileSync('weird.txt').toString().split("\n");
+//var fs = require('fs');
+//var input = fs.readFileSync('weird.txt').toString().split("\n");
+
+var input = ['<{o"i!a,<{i<a>'];
 
 var addUp = function(s, level) {
   while (idx < s.length) {
@@ -46,13 +48,12 @@ var addUp = function(s, level) {
   }
 }
 
-var big_total = 0;
-for (var i = 0; i < input.length; i++) {
-  var input_sa = input[i].split('');
-  total = 0;
+
+
+for (i = 0; i < input.length; i++) {
   idx = 0;
-  in_comment = false;
-  addUp(input_sa, 1);
-  big_total += total;
+  var s = input[i];
+  while (idx < s.length) {
+    console.log(getToken(s));
+  }
 }
-console.log(big_total);
